@@ -38,6 +38,7 @@
         <version.wildfly.maven.plugin>2.0.0.Final</version.wildfly.maven.plugin>
         <version.com.nimbusds.jose.jwt>5.4</version.com.nimbusds.jose.jwt>
         <version.glassfish.json>1.1.6</version.glassfish.json>
+        <version.microprofile.jwt.api>1.1.1</version.microprofile.jwt.api>
 
         <!-- Define the version of the JBoss BOMs we want to import to specify tested stacks. -->
         <version.jboss.bom>18.0.0.Final</version.jboss.bom>
@@ -141,7 +142,13 @@
             <version>${version.glassfish.json}</version>
             <scope>test</scope>
         </dependency>
-
+        <dependency>
+            <groupId>org.eclipse.microprofile.jwt</groupId>
+            <artifactId>microprofile-jwt-auth-api</artifactId>
+            <version>${version.microprofile.jwt.api}</version>
+            <scope>provided</scope>
+        </dependency>
+    
         <!-- Test scope dependencies -->
         <dependency>
             <groupId>junit</groupId>
