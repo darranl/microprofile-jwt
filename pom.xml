@@ -36,7 +36,7 @@
         <!-- JBoss dependency versions -->
         
         <version.wildfly.maven.plugin>2.0.0.Final</version.wildfly.maven.plugin>
-        <version.com.nimbusds.jose.jwt>5.4</version.com.nimbusds.jose.jwt>
+        <version.com.nimbusds.jose.jwt>7.9</version.com.nimbusds.jose.jwt>
         <version.glassfish.json>1.1.6</version.glassfish.json>
         <version.microprofile.jwt.api>1.1.1</version.microprofile.jwt.api>
 
