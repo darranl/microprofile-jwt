@@ -39,7 +39,7 @@ public class TokenUtil {
         }
     }
 
-    private static String generateJWT(final PrivateKey privateKey, final String principal, final String...groups) throws Exception {
+    private static String generateJWT(final PrivateKey privateKey, final String principal, final String birthdate, final String...groups) throws Exception {
         JWSSigner signer = new RSASSASigner(privateKey);
         JsonArrayBuilder groupsBuilder = Json.createArrayBuilder();
         for (String group : groups) { groupsBuilder.add(group); }
@@ -51,6 +51,7 @@ public class TokenUtil {
                 .add("iss", "quickstart-jwt-issuer")
                 .add("aud", "jwt-audience")
                 .add("groups", groupsBuilder.build())
+                .add("birthdate", birthdate)
                 .add("jti", UUID.randomUUID().toString())
                 .add("iat", currentTime)
                 .add("exp", currentTime + 14400);
@@ -66,13 +67,14 @@ public class TokenUtil {
     }
 
     public static void main(String[] args) throws Exception {
-        if (args.length < 1) throw new IllegalArgumentException("Usage TokenUtil {principal} {groups}");
+        if (args.length < 2) throw new IllegalArgumentException("Usage TokenUtil {principal} {birthdate} {groups}");
         PrivateKey privateKey = loadPrivateKey("private.pem");
         String principal = args[0];
-        String[] groups = new String[args.length -1];
-        System.arraycopy(args, 1, groups, 0, groups.length);
+        String birthdate = args[1];
+        String[] groups = new String[args.length - 2];
+        System.arraycopy(args, 2, groups, 0, groups.length);
 
-        String token = generateJWT(privateKey, principal, groups);
+        String token = generateJWT(privateKey, principal, birthdate, groups);
         String[] parts = token.split("\\.");
         System.out.println(String.format("\nJWT Header - %s", new String(Base64.getDecoder().decode(parts[0]), StandardCharsets.UTF_8)));
         System.out.println(String.format("\nJWT Claims - %s", new String(Base64.getDecoder().decode(parts[1]), StandardCharsets.UTF_8)));
