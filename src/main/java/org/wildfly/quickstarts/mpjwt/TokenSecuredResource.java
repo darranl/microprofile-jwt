@@ -11,6 +11,7 @@ import javax.ws.rs.core.SecurityContext;
 public class TokenSecuredResource {
 
     @GET
+    @Path("/hello")
     public String hello(@Context SecurityContext securityContext) {
         Principal principal = securityContext.getUserPrincipal();
         String caller = principal == null ? "anonymous" : principal.getName();
